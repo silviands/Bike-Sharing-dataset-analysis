@@ -10,9 +10,10 @@ st.write
 st.set_page_config(page_title="Bike Sharing Dashboard", layout="wide")
 
 def create_monthly_rent_df(df):
+    print(df.columns)
     df['dteday'] = pd.to_datetime(df['dteday'])
     df = df.set_index('dteday')
-    monthly_rent_df = df.resample(rule='M', on='dteday').agg({
+    monthly_rent_df = df.resample('M').agg({
         "cnt": "sum",
         "registered": "sum",
         "casual": "sum"
